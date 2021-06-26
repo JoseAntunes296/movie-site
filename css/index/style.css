@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background: white;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: light;
+    margin: 1em;
+    margin-top: 6em;
+    z-index: 1;
+  }
+  
+  #header {
+    height: 4em !important; 
+    position: fixed !important;
+    top: 0 !important;
+    width: 100% !important;
+    background-color: black !important;
+    position: fixed !important;
+    z-index: 2 !important;
+    left: 0 !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  }
+  
+  h1 {
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    padding-top: 0.3em;
+  }
+  
+  a {
+    color: inherit;
+  }
+  
+  .container {
+    margin: 0 auto;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 2em;
+    padding-top: 0.5em;
+  }
+  
+  .container .item {
+    margin: 1em;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .container .item .poster {
+    width: 185px;
+    height: 278px;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: .5em;
+    box-shadow: 0 10px 17px rgba(0, 0, 0, 0.15);
+  }
+  
+  .container .item p {
+    width: 185px;
+    font-size: .9em;
+  }
