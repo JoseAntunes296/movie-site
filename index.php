@@ -14,8 +14,28 @@ session_start();
     <link rel="stylesheet" href="css/index/style.css">
     <link rel="stylesheet" href="css/index/navbar.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="pagination.css">
+    <link rel="stylesheet" href="/lib/bootstrap.min.css">
+
     <!-- js -->
     <script src="js/index/script.js"></script>
+    <style>
+        .rating_movie {
+            align-items: center;
+            background-color: #f68d01;
+            border-radius: 50%;
+            box-shadow: 0 0 1em rgba(0, 0, 0, 0.25);
+            display: flex;
+            height: 2.25em;
+            justify-content: center;
+            padding: 0.5em;
+            position: relative;
+            right: -10rem;
+            text-align: center;
+            top: -4%;
+            width: 2.25em;
+        }
+    </style>
 
 </head>
 
@@ -23,26 +43,68 @@ session_start();
     <div id="header">
         <h1>MOVIES.TV</h1>
     </div>
-    <div class="container">
-
+    <div class="container" style="margin-bottom: 5rem;">
         <?php
-        $q = $conn->query("SELECT name,image FROM filmes");
-        if ($q->num_rows > 0) {
-            // output data of each row
-            while ($row = $q->fetch_assoc()) {
 
-                echo '<a href="movie.php?title=' . $row['name'] . '" class="item tilt-poster">'; ?>
-                <?php echo '<div class="poster" style="background-image: url(img_uploads/' . $row['image'] . ')">
-            </div>'; ?>
-                <?php echo '<p>' . $row['name'] . '</p>'; ?>
-                </a>
-        <?php
-            }
+        if (isset($_GET['pageno'])) {
+            $pageno = $_GET['pageno'];
+        } else {
+            $pageno = 1;
         }
-        ?>
+        $no_of_records_per_page = 40;
+        $offset = ($pageno - 1) * $no_of_records_per_page;
+
+        $total_pages_sql = "SELECT COUNT(*) FROM filmes";
+        $result = mysqli_query($conn, $total_pages_sql);
+        $total_rows = mysqli_fetch_array($result)[0];
+        $total_pages = ceil($total_rows / $no_of_records_per_page);
+
+        $sql = "SELECT * FROM filmes LIMIT $offset, $no_of_records_per_page";
+        $res_data = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_array($res_data)) {
+            echo '<a href="movie.php?id_movie=' . $row['id_movie'] . '" class="item tilt-poster">
+            <div class="poster" style="background-image: url(img_uploads/' . $row['image'] . '.jpg)">
+        <span class="rating_movie" >' . $row['rating'] . '</span>
+            </div>
+            <p>' . $row['name'] . '</p>'; ?>
+            </a>
+        <?php
+        }
+        ?><ul class="pagination">
+
+            <li class="page-item">
+                <a href="?pageno=1" class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                </a>
+            </li>
+            <li class="page-item <?php if ($pageno <= 1) {
+                                        echo 'disabled';
+                                    } ?>">
+                <a class="page-link" href="<?php if ($pageno <= 1) {
+                                                echo '#';
+                                            } else {
+                                                echo "?pageno=" . ($pageno - 1);
+                                            } ?>">1</a>
+            </li>
+            <li class="page-item <?php if ($pageno >= $total_pages) {
+                                        echo 'disabled';
+                                    } ?>">
+                <a class="page-link" href="<?php if ($pageno >= $total_pages) {
+                                                echo '#';
+                                            } else {
+                                                echo "?pageno=" . ($pageno + 1);
+                                            } ?>">2</a>
+            </li>
+            <li class="page-item">
+                <a href="?pageno=<?php echo $total_pages; ?>" class="page-link" aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                </a>
+            </li>
+        </ul>
     </div>
+
     <nav class="nav" style="margin-left: -1rem;">
-        <a href="#" class="nav__link">
+        <a href="index.php" class="nav__link">
             <i class="material-icons nav__icon">Lista de Filmes</i>
             <span class="nav__text">Movies List</span>
         </a>
@@ -89,7 +151,7 @@ session_start();
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     if ($row['cargo'] == 1) {
-                        echo '<a href="#" class="nav__link">
+                        echo '<a href="administracao/index.html" class="nav__link">
                     <i class="material-icons nav__icon">Administração</i>
                     <span class="nav__text">Administration</span>
                 </a>';

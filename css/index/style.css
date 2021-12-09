@@ -1,9 +1,9 @@
 * {
     margin: 0;
     padding: 0;
-  }
-  
-  body {
+}
+
+body {
     background: white;
     color: #000;
     font-family: 'Montserrat', sans-serif;
@@ -11,10 +11,10 @@
     margin: 1em;
     margin-top: 6em;
     z-index: 1;
-  }
-  
-  #header {
-    height: 4em !important; 
+}
+
+#header {
+    height: 4em !important;
     position: fixed !important;
     top: 0 !important;
     width: 100% !important;
@@ -23,20 +23,20 @@
     z-index: 2 !important;
     left: 0 !important;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
-  }
-  
-  h1 {
+}
+
+h1 {
     font-size: 2em;
     color: white;
     text-align: center;
     padding-top: 0.3em;
-  }
-  
-  a {
+}
+
+a {
     color: inherit;
-  }
-  
-  .container {
+}
+
+.container {
     margin: 0 auto;
     max-width: 100%;
     display: flex;
@@ -44,24 +44,96 @@
     justify-content: center;
     padding-bottom: 2em;
     padding-top: 0.5em;
-  }
-  
-  .container .item {
+}
+
+.container .item {
     margin: 1em;
     text-align: center;
     text-decoration: none;
-  }
-  
-  .container .item .poster {
+}
+
+.container .item .poster {
     width: 185px;
     height: 278px;
     background-position: center;
     background-size: cover;
     margin-bottom: .5em;
     box-shadow: 0 10px 17px rgba(0, 0, 0, 0.15);
-  }
-  
-  .container .item p {
+}
+
+.container .item p {
     width: 185px;
     font-size: .9em;
-  }
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie {
+    background-color: #373b69;
+    border-radius: 3px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    margin: 1rem;
+    width: 300px;
+}
+
+.movie img {
+    width: 100%;
+}
+
+.movie-info {
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem 1rem;
+    letter-spacing: 0.5px;
+}
+
+.movie-info h3 {
+    margin: 0;
+}
+
+.movie-info span {
+    background-color: #22254b;
+    border-radius: 3px;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+}
+
+.movie-info span.green {
+    color: rgb(39, 189, 39);
+}
+
+.movie-info span.orange {
+    color: orange;
+}
+
+.movie-info span.red {
+    color: rgb(189, 42, 42);
+}
+
+.overview {
+    background-color: #fff;
+    padding: 2rem;
+    position: absolute;
+    max-height: 100%;
+    overflow: auto;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transform: translateY(101%);
+    transition: transform 0.3s ease-in;
+}
+
+.overview h3 {
+    margin-top: 0;
+}
+
+.movie:hover .overview {
+    transform: translateY(0);
+}
