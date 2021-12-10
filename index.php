@@ -43,7 +43,7 @@ session_start();
     <div id="header">
         <h1>MOVIES.TV</h1>
     </div>
-    <div class="container" style="margin-bottom: 5rem;">
+    <div class="container" style="margin: 10rem 10rem 10rem 10rem;">
         <?php
 
         if (isset($_GET['pageno'])) {
